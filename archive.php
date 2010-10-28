@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 yourTwapperKeeper - Twitter Archiving Application - http://your.twapperkeeper.com
 Copyright (c) 2010 John O'Brien III - http://www.linkedin.com/in/jobrieniii
@@ -75,7 +75,7 @@ $logged_in = TRUE;
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<link rel="alternate" type="application/rss+xml" href="<? echo $permrss; ?>">
+<link rel="alternate" type="application/rss+xml" href="<?php echo $permrss; ?>">
 <title>Your Twapper Keeper - Archive your own tweets</title>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <link href="resources/css/custom-theme/jquery-ui-1.8.4.custom.css" rel="stylesheet" type="text/css">
@@ -88,7 +88,7 @@ $logged_in = TRUE;
 <body>
 
 <div id='login'>
-<? echo $login_status; ?> 
+<?php echo $login_status; ?> 
 
 <p><a href='index.php'><img src='resources/yourTwapperKeeperLogo.png'/></a></p>
 </div> <!-- end login div -->
@@ -98,18 +98,18 @@ $logged_in = TRUE;
 </div> <!-- end header div -->
 
 <div id='main'>
-	<? if (isset($_SESSION['notice'])) { ?>
-	<div class='ui-widget'><div class='ui-state-highlight ui-corner-all' style='padding:5px; margin: 5px; width:750px; margin-left:auto; margin-right:auto; text-align:center'><span class='ui-icon ui-icon-info' style='float: left'></span><b><? echo $_SESSION['notice']; ?></b></div></div>
+	<?php if (isset($_SESSION['notice'])) { ?>
+	<div class='ui-widget'><div class='ui-state-highlight ui-corner-all' style='padding:5px; margin: 5px; width:750px; margin-left:auto; margin-right:auto; text-align:center'><span class='ui-icon ui-icon-info' style='float: left'></span><b><?php echo $_SESSION['notice']; ?></b></div></div>
 
-	<?
+	<?php
 	 unset($_SESSION['notice']);
 	 }?> 
 
-<h1><? echo $archiveInfo['results'][0]['keyword']; ?> - <? echo $archiveInfo['results'][0]['description']; ?></h1>
-<h2>Created on <? echo date(DATE_RFC2822,$archiveInfo['results'][0]['create_time']); ?> and total number of tweets = <? echo $archiveInfo['results'][0]['count']; ?></h2>
-<h4>tags: <? echo $archiveInfo['results'][0]['tags']; ?></h4>
+<h1><?php echo $archiveInfo['results'][0]['keyword']; ?> - <?php echo $archiveInfo['results'][0]['description']; ?></h1>
+<h2>Created on <?php echo date(DATE_RFC2822,$archiveInfo['results'][0]['create_time']); ?> and total number of tweets = <?php echo $archiveInfo['results'][0]['count']; ?></h2>
+<h4>tags: <?php echo $archiveInfo['results'][0]['tags']; ?></h4>
 
-<?
+<?php
 // filter form
 $month_num = array(1,2,3,4,5,6,7,8,9,10,11,12);
 $month_verbose = array('January','February','March','April','May','June','July','August','September','October','November','December');  
@@ -309,7 +309,7 @@ $languageCodes = array(
 <div style='border-top:1px solid black; border-bottom:1px solid black; text-align:center; margin-left:auto; margin-right:auto; padding:5px; width:1280px'>
 <center>
 <form method='get' action='archive.php'>
-<input type='hidden' name='id' value='<? echo $id; ?>'>
+<input type='hidden' name='id' value='<?php echo $id; ?>'>
 <table>
 <tr>
 <td><b>START DATE</b></td><td></td><td></td><td></td><td><b>END DATE</b></td><td></td><td></td><td><b>ORDER</b></td><td><b>VIEW LIMIT</b></td><td><b>FROM USER</b></td><td><b>TWEET TEXT</b></td><td><b>LANGUAGE</b></td>
@@ -321,7 +321,7 @@ $languageCodes = array(
 <td>
 <SELECT NAME="sm">
 <OPTION value=''>
-<?
+<?php
 foreach ($month_num as $value) {
     echo "<OPTION value='$value'";
     if ($value == $_GET['sm']) {echo " SELECTED";}
@@ -334,7 +334,7 @@ foreach ($month_num as $value) {
 <td>
 <SELECT NAME="sd">
 <OPTION value=''>
-<?
+<?php
 foreach ($day as $value) {
     echo "<OPTION";
     if ($value == $_GET['sd']) {echo " SELECTED";}
@@ -348,7 +348,7 @@ foreach ($day as $value) {
 <td>                                                                                                                
 <SELECT NAME="sy">
 <OPTION value=''>
-<?
+<?php
 foreach ($year as $value) {
     echo "<OPTION";
     if ($value == $_GET['sy']) {echo " SELECTED";}
@@ -363,7 +363,7 @@ foreach ($year as $value) {
 <td>
 <SELECT NAME="em">
 <OPTION value=''>
-<?
+<?php
 foreach ($month_num as $value) {
     echo "<OPTION value='$value'";
     if ($value == $_GET['em']) {echo " SELECTED";}
@@ -376,7 +376,7 @@ foreach ($month_num as $value) {
 <td>
 <SELECT NAME="ed">
 <OPTION value=''>
-<?
+<?php
 foreach ($day as $value) {
     echo "<OPTION";
     if ($value == $_GET['ed']) {echo " SELECTED";}
@@ -390,7 +390,7 @@ foreach ($day as $value) {
 <td>
 <SELECT NAME="ey">
 <OPTION value=''>
-<?
+<?php
 foreach ($year as $value) {
     echo "<OPTION";
     if ($value == $_GET['ey']) {echo " SELECTED";}
@@ -404,7 +404,7 @@ foreach ($year as $value) {
 <td>
 <SELECT NAME="o">
 <OPTION value=''>
-<?
+<?php
 foreach ($order_values as $key=>$value) {
     echo "<OPTION value='$value'";
     if ($value == $_GET['o']) {echo " SELECTED";}
@@ -417,7 +417,7 @@ foreach ($order_values as $key=>$value) {
 <td>
 <SELECT NAME="l">
 <OPTION value=''>
-<?
+<?php
 foreach ($limit_values as $value) {
     echo "<OPTION value='$value'";
     if ($value == $limit) {echo " SELECTED";}
@@ -427,20 +427,20 @@ foreach ($limit_values as $value) {
 </SELECT>
 </td>
 
-<?
+<?php
 echo "<td>";
 echo "<input name='from_user' value ='".$_GET['from_user']."'/>";
 echo "</td>";
 ?>
 
 <td>
-<input name='text' value='<? echo $_GET['text']; ?>'/>
+<input name='text' value='<?php echo $_GET['text']; ?>'/>
 </td>
 
 <td>
 <SELECT NAME='lang'>
 <OPTION value=''>
-<?
+<?php
 foreach ($languageCodes as $key=>$value) {
     echo "<OPTION value='$key'";
     if ($key == $_GET['lang']) {echo " SELECTED";}
@@ -452,7 +452,7 @@ foreach ($languageCodes as $key=>$value) {
 
 <td>
 <input type="checkbox" name="nort" value="1"
-<? if ($_GET['nort'] == 1) {echo " checked";}?>
+<?php if ($_GET['nort'] == 1) {echo " checked";}?>
 />remove RTs
 </td>
 
@@ -463,7 +463,7 @@ foreach ($languageCodes as $key=>$value) {
 
 </form>
 <br><br>
-<? 
+<?php 
           
 echo "HTML Permalink = <a href='$permurl'>$permurl</a><br>";
 echo "RSS Permalink = <a href='$permrss'>$permrss</a><br>";
@@ -482,7 +482,7 @@ echo "</h5>";
 
 <div style='text-align:left; margin-left:auto; margin-right:auto; width:1024px; padding-top:15px; padding-bottom:15px'>
 
-<?        
+<?php        
 		$tw_count = 0;
         
         foreach ($archiveTweets as $row) {

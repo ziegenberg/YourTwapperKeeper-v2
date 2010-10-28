@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 yourTwapperKeeper - Twitter Archiving Application - http://your.twapperkeeper.com
 Copyright (c) 2010 John O'Brien III - http://www.linkedin.com/in/jobrieniii
@@ -53,12 +53,12 @@ $logged_in = TRUE;
 <body>
 
 <div id='login'>
-<? echo $login_status; ?> 
+<?php echo $login_status; ?> 
 <p><a href='index.php'><img src='resources/yourTwapperKeeperLogo.png'/></a></p>
 </div> <!-- end login div -->
 
 <div id='header'>
-<? if ($logged_in) { ?>
+<?php if ($logged_in) { ?>
 <p><center>
 <form action='create.php' method='post'>
 <table class='none'>
@@ -70,7 +70,7 @@ $logged_in = TRUE;
 </form>
 </center>
 <br>
-<?
+<?php
 // allow start stop (only if in admin group)
 if (in_array($_SESSION['access_token']['screen_name'],$admin_screen_name)) {
 	$archiving_status = $tk->statusArchiving($archive_process_array);
@@ -83,17 +83,17 @@ if (in_array($_SESSION['access_token']['screen_name'],$admin_screen_name)) {
 	}
 ?>
 </p>
-<? } ?>
+<?php } ?>
 </div> <!-- end header div -->
 
 <div id='main'>
-	<? if (isset($_SESSION['notice'])) { ?>
-	<div class='ui-widget'><div class='ui-state-highlight ui-corner-all' style='padding:5px; margin: 5px; width:750px; margin-left:auto; margin-right:auto; text-align:center'><span class='ui-icon ui-icon-info' style='float: left'></span><b><? echo $_SESSION['notice']; ?></b></div></div>
-	<?
+	<?php if (isset($_SESSION['notice'])) { ?>
+	<div class='ui-widget'><div class='ui-state-highlight ui-corner-all' style='padding:5px; margin: 5px; width:750px; margin-left:auto; margin-right:auto; text-align:center'><span class='ui-icon ui-icon-info' style='float: left'></span><b><?php echo $_SESSION['notice']; ?></b></div></div>
+	<?php
 	 unset($_SESSION['notice']);
 	 }?> 
 	
-<?
+<?php
 
 // list table of archives
 $archives = $tk->listArchive();
@@ -107,27 +107,27 @@ foreach ($archives['results'] as $value) {
 		?>
 		<script type="text/javascript">
     		$(function() {  
-    			$("#deletedialog<? echo $value['id']; ?>").dialog({
+    			$("#deletedialog<?php echo $value['id']; ?>").dialog({
             		autoOpen: false,  
             		height: 150,
             		width: 800,
             		modal: true
             		});
             
-            	$('#deletelink<? echo $value['id']; ?>').click(function(){
-            		$('#deletedialog<? echo $value['id']; ?>').dialog('open');
+            	$('#deletelink<?php echo $value['id']; ?>').click(function(){
+            		$('#deletedialog<?php echo $value['id']; ?>').dialog('open');
             		return false;
             		});
             	
-            	$("#updatedialog<? echo $value['id']; ?>").dialog({
+            	$("#updatedialog<?php echo $value['id']; ?>").dialog({
             		autoOpen: false,  
             		height: 300,
             		width: 300,
             		modal: true
             		});
             
-            	$('#updatelink<? echo $value['id']; ?>').click(function(){
-            		$('#updatedialog<? echo $value['id']; ?>').dialog('open');
+            	$('#updatelink<?php echo $value['id']; ?>').click(function(){
+            		$('#updatedialog<?php echo $value['id']; ?>').dialog('open');
             		return false;
             		});
             		
@@ -135,14 +135,14 @@ foreach ($archives['results'] as $value) {
             	});          
  		</script>
  		
- 		<div id = 'deletedialog<? echo $value['id']; ?>' title='Are you sure you want to delete <? echo $value['keyword']; ?> archive?'>
- 		<br><br><center><form method='post' action='delete.php'><input type='hidden' name='id' value='<? echo $value['id']; ?>'/><input type='submit' value='Yes'/></form></center>
+ 		<div id = 'deletedialog<?php echo $value['id']; ?>' title='Are you sure you want to delete <?php echo $value['keyword']; ?> archive?'>
+ 		<br><br><center><form method='post' action='delete.php'><input type='hidden' name='id' value='<?php echo $value['id']; ?>'/><input type='submit' value='Yes'/></form></center>
  		</div> 
  		
- 		 <div id = 'updatedialog<? echo $value['id']; ?>' title='Update <? echo $value['keyword']; ?> archive'>
- 		<br><br><center><form method='post' action='update.php'>Description<br><input name='description' value='<? echo $value['description']; ?>'/><br><br>Tags<br><input name='tags' value='<? echo $value['tags']; ?>'/><input type='hidden' name='id' value='<? echo $value['id']; ?>'/><br><br><p><input type='submit' value='Update'/></p></form></center>
+ 		 <div id = 'updatedialog<?php echo $value['id']; ?>' title='Update <?php echo $value['keyword']; ?> archive'>
+		<br><br><center><form method='post' action='update.php'>Description<br><input name='description' value='<?php echo $value['description']; ?>'/><br><br>Tags<br><input name='tags' value='<?php echo $value['tags']; ?>'/><input type='hidden' name='id' value='<?php echo $value['id']; ?>'/><br><br><p><input type='submit' value='Update'/></p></form></center>
  		</div> 
- 		<?
+ 		<?php
 		echo "<a href='#' id='updatelink".$value['id']."'><img src='./resources/pencil_24.png' alt='Edit Archive' title='Edit Archive'/></a>";
 		echo "  <a href='#' id='deletelink".$value['id']."'><img src='./resources/close_2_24.png' alt='Delete Archive' title='Delete Archive'/></a>";
 		}
@@ -158,7 +158,7 @@ echo "</table>";
 
 
 <div id='footer'>
-<p>Your TwapperKeeper - <? echo $yourtwapperkeeper_version; ?></p>
+<p>Your TwapperKeeper - <?php echo $yourtwapperkeeper_version; ?></p>
 </div>
 
 </body>

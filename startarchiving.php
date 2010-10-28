@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 yourTwapperKeeper - Twitter Archiving Application - http://your.twapperkeeper.com
 Copyright (c) 2010 John O'Brien III - http://www.linkedin.com/in/jobrieniii
@@ -41,7 +41,7 @@ exec($kill);
 // Start and register jobs
 $pid = '';
 $pids = '';
-foreach ($cmd as $key=>$value) {
+foreach ( $cmd as $key=>$value ) {
 	$job = 'php '.$tk_your_dir.$value;
 	$pid = $tk->startProcess($job);
 	$pids .= $pid.",";

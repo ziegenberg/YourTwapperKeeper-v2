@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 yourTwapperKeeper - Twitter Archiving Application - http://your.twapperkeeper.com
 Copyright (c) 2010 John O'Brien III - http://www.linkedin.com/in/jobrieniii
