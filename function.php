@@ -234,20 +234,33 @@ function statusArchiving($process_array) {
 	// If PIDs > 0 - we are considered running
 	$running = TRUE;
 	$pids = '';
+	$shouldBeRunning= 1;
 	foreach ($process_array as $key=>$value) {
 		$q = "select * from processes where process = '$value'";
 		$r = mysql_query($q, $db->connection);
 		$r = mysql_fetch_assoc($r);
 		$pid = $r['pid'];
+		exec("ps $pid", $PROC);
+		if ( count($PROC) < 2 ) {
+			$running=FALSE;
+		}
 		$pids .= $pid.",";
-		if ($pid == 0) {$running = FALSE;}
+		if ($pid == 0) {
+			$running = FALSE;
+			$shouldBeRunning=FALSE;
+		}
 	}
 	$pids = substr($pids, 0, -1);
 	
 	$result = array();
 	if ($running == FALSE) {
 	$result[0] = FALSE;
-	$result[1] = "<div style='color:red'>Archiving processes are NOT running</div>";
+	if ( $shouldBeRunning == 1 ) {
+		$result[1] = "<div style='color:red'>Archiving processes have died.  (PIDS = $pids) </div>";
+	} else {
+		$result[1] = "<div style='color:red'>Archiving processes are NOT running</div>";
+	}
+	
 	} else {
 	$result[0] = TRUE;
 	$result[1] = "<div style='color:green'>Archiving processes are running (PIDS = $pids)</div>";
@@ -265,7 +278,7 @@ function killProcess($pid) {
 
 // start archiving process
 function startProcess($cmd) {
-	$command = "nohup $cmd > /dev/null 2>&1 & echo $!";
+	$command = "$cmd > /dev/null 2>&1 & echo $!";
     exec($command ,$op);
     $pid = (int)$op[0];
     return ($pid);
